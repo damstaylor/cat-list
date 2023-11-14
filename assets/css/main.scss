@@ -3,7 +3,7 @@ $bg-color: #424242;
 
 body {
   background-color: $bg-color;
-  font-family: "Helvetica Neue";
+  font-family: "Helvetica Neue", sans-serif;
 }
 
 a:any-link, li a:hover:not(.disabled), .current-page-indicator {
