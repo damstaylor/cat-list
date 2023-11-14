@@ -14,19 +14,43 @@
     <footer>
       <nav>
         <ul class="pagination">
-          <li><a :class="{'disabled': userPage === 1}" @click="setPage(0)">«</a></li>
-          <li><a :class="{'disabled': userPage === 1}" @click="decreasePage">&lt;</a></li>
-          <li :class="{hidden: getNumberOfPages && userPage < 3}"><span>...</span></li>
-          <li :class="{hidden: getNumberOfPages && userPage === 1}"><a @click="decreasePage">{{ userPage - 1 }}</a></li>
-          <li class="current-page-indicator"><a>{{ userPage }}</a></li>
-          <li :class="{hidden: getNumberOfPages && userPage === getNumberOfPages}"><a @click="increasePage">{{ userPage + 1 }}</a></li>
-          <li :class="{hidden: getNumberOfPages && userPage > getNumberOfPages - 2 }"><span>...</span></li>
-          <li><a :class="{'disabled': userPage === getNumberOfPages}" @click="increasePage">&gt;</a></li>
-          <li><a :class="{'disabled': userPage === getNumberOfPages}" @click="setPage(getNumberOfPages - 1)">»</a></li>
+          <li>
+            <a :class="{'disabled': userPage === 1}" @click="setPage(0)">«</a>
+          </li>
+          <li>
+            <a :class="{'disabled': userPage === 1}" @click="decreasePage">&lt;</a>
+          </li>
+          <li :class="{hidden: getNumberOfPages && userPage < 3}">
+            <span>...</span>
+          </li>
+          <li :class="{hidden: getNumberOfPages && userPage === 1}">
+            <a @click="decreasePage">{{ userPage - 1 }}</a>
+          </li>
+          <li class="current-page-indicator">
+            <a>{{ userPage }}</a>
+          </li>
+          <li :class="{hidden: getNumberOfPages && userPage === getNumberOfPages}">
+            <a @click="increasePage">{{ userPage + 1 }}</a>
+          </li>
+          <li :class="{hidden: getNumberOfPages && userPage > getNumberOfPages - 2}">
+            <span>...</span>
+          </li>
+          <li>
+            <a :class="{'disabled': userPage === getNumberOfPages}" @click="increasePage">&gt;</a>
+          </li>
+          <li>
+            <a :class="{'disabled': userPage === getNumberOfPages}" @click="setPage(getNumberOfPages - 1)">»</a>
+          </li>
         </ul>
         <div class="go-to-page">
           <label for="go-to-page-input">Go to page:</label>
-          <input id="go-to-page-input" type="number" min=1 :max="getNumberOfPages" :value="userPage" @change="onPageNumberInput" >
+          <input id="go-to-page-input"
+                 type="number"
+                 min=1
+                 :max="getNumberOfPages"
+                 :value="userPage"
+                 @change="onPageNumberInput"
+          >
         </div>
         <div>
           <label for="per-page-select">Images per page:</label>
