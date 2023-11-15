@@ -1,5 +1,6 @@
 <script lang="ts">
 import {defineComponent} from 'vue';
+import '~/assets/css/main.scss';
 
 export default defineComponent({
   name: 'App',
