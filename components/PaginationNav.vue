@@ -19,16 +19,16 @@ export default defineComponent({
     },
   },
   methods: {
-    onClickPrevious(event: MouseEvent) {
+    onClickPrevious() {
       this.$emit("click-previous");
     },
-    onClickNext(event: MouseEvent) {
+    onClickNext() {
       this.$emit("click-next");
     },
-    onClickStart(event: MouseEvent) {
+    onClickStart() {
       this.$emit("click-start");
     },
-    onClickEnd(event: MouseEvent) {
+    onClickEnd() {
       this.$emit("click-end");
     },
     onPageNumberInput(event: Event) {
