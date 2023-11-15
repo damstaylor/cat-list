@@ -12,55 +12,16 @@
       </div>
     </div>
     <footer>
-      <nav>
-        <ul class="pagination">
-          <li>
-            <a :class="{'disabled': userPage === 1}" @click="setPage(0)">«</a>
-          </li>
-          <li>
-            <a :class="{'disabled': userPage === 1}" @click="decreasePage">&lt;</a>
-          </li>
-          <li :class="{hidden: getNumberOfPages && userPage < 3}">
-            <span>...</span>
-          </li>
-          <li :class="{hidden: getNumberOfPages && userPage === 1}">
-            <a @click="decreasePage">{{ userPage - 1 }}</a>
-          </li>
-          <li class="current-page-indicator">
-            <a>{{ userPage }}</a>
-          </li>
-          <li :class="{hidden: getNumberOfPages && userPage === getNumberOfPages}">
-            <a @click="increasePage">{{ userPage + 1 }}</a>
-          </li>
-          <li :class="{hidden: getNumberOfPages && userPage > getNumberOfPages - 2}">
-            <span>...</span>
-          </li>
-          <li>
-            <a :class="{'disabled': userPage === getNumberOfPages}" @click="increasePage">&gt;</a>
-          </li>
-          <li>
-            <a :class="{'disabled': userPage === getNumberOfPages}" @click="setPage(getNumberOfPages - 1)">»</a>
-          </li>
-        </ul>
-        <div class="go-to-page">
-          <label for="go-to-page-input">Go to page:</label>
-          <input id="go-to-page-input"
-                 type="number"
-                 min=1
-                 :max="getNumberOfPages"
-                 :value="userPage"
-                 @change="onPageNumberInput"
-          >
-        </div>
-        <div>
-          <label for="per-page-select">Images per page:</label>
-          <select name="per-page" id="per-page-select" @input="onPerPageInput">
-            <option value="4">4</option>
-            <option value="9" selected>9</option>
-            <option value="16">16</option>
-          </select>
-        </div>
-      </nav>
+      <PaginationNav :currentPage="page"
+                     :total="getPaginationCount"
+                     :perPage="limit"
+                     @click-previous="decreasePage"
+                     @click-next="increasePage"
+                     @click-start="setFirstPage"
+                     @click-end="setLastPage"
+                     @page-number-input="onPageNumberInput"
+                     @per-page-input="onPerPageInput"
+      />
     </footer>
   </div>
 </template>
@@ -83,9 +44,6 @@ export default {
     this.getPictures();
   },
   computed: {
-    userPage() {
-      return this.page + 1;
-    },
     getPaginationCount() {
       return this.responseHeaders ? this.responseHeaders["pagination-count"] : 0;
     },
@@ -149,8 +107,13 @@ export default {
         this.page--;
       }
     },
-    onPageNumberInput(event) {
-      let newUserPage = Number(event.target.value);
+    setFirstPage() {
+      this.setPage(0);
+    },
+    setLastPage() {
+      this.setPage(this.getNumberOfPages - 1);
+    },
+    onPageNumberInput(newUserPage) {
       if (newUserPage < 1) {
         newUserPage = 1;
       } else if (newUserPage > this.getNumberOfPages) {
@@ -158,8 +121,8 @@ export default {
       }
       this.setPage(newUserPage - 1);
     },
-    onPerPageInput(event) {
-      this.limit = Number(event.target.value);
+    onPerPageInput(newPerPageValue) {
+      this.limit = newPerPageValue;
     },
   },
   watch: {
