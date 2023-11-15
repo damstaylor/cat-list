@@ -3,7 +3,11 @@ import {defineComponent} from 'vue'
 
 export default defineComponent({
   name: "PaginationNav",
-  props: ["currentPage", "total", "perPage"],
+  props: {
+    currentPage: { type: Number, default: () => 0 },
+    total: { type: Number, default: () => 0 },
+    perPage: { type: Number, default: () => 9 }
+  },
   computed: {
     getCurrentUserPage(): Number {
       return this.currentPage + 1;
