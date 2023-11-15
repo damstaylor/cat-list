@@ -9,16 +9,16 @@ export default defineComponent({
     perPage: { type: Number, default: () => 9 }
   },
   computed: {
-    getCurrentUserPage(): Number {
+    getCurrentUserPage(): number {
       return this.currentPage + 1;
     },
-    getNumberOfPages(): Number {
+    getNumberOfPages(): number {
       return Math.ceil(this.total / this.perPage);
     },
-    isFirstPage(): Boolean {
+    isFirstPage(): boolean {
       return this.getCurrentUserPage === 1;
     },
-    isLastPage(): Boolean {
+    isLastPage(): boolean {
       return this.getCurrentUserPage === this.getNumberOfPages;
     },
   },
