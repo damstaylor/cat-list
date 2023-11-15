@@ -1,13 +1,24 @@
 <script lang="ts">
 import {defineComponent} from 'vue';
 
+interface CatData {
+  url: string;
+  breeds: BreedInfo[];
+}
+
+interface BreedInfo {
+  name: string;
+  origin: string;
+  wikipedia_url: string;
+}
+
 export default defineComponent({
   name: 'GridItem',
   props: {
-    catData: { type: Object, default: () => ({}) },
+    catData: { type: Object as () => CatData, default: () => ({ url: '' }) } as any,
   },
   computed: {
-    getBreedInfo(): object {
+    getBreedInfo(): BreedInfo | null {
       return this.catData?.breeds?.[0] ?? null;
     },
     getBreedName(): string {
@@ -20,7 +31,7 @@ export default defineComponent({
       return this.getBreedInfo?.wikipedia_url ?? '';
     },
   },
-})
+});
 </script>
 
 <template>
@@ -35,5 +46,4 @@ export default defineComponent({
 </template>
 
 <style scoped>
-
 </style>
