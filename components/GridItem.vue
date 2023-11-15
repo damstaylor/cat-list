@@ -1,8 +1,8 @@
 <script lang="ts">
-import {defineComponent} from 'vue'
+import {defineComponent} from 'vue';
 
 export default defineComponent({
-  name: "GridItem",
+  name: 'GridItem',
   props: {
     catData: { type: Object, default: () => ({}) },
   },
@@ -11,13 +11,13 @@ export default defineComponent({
       return this.catData?.breeds?.[0] ?? null;
     },
     getBreedName(): string {
-      return this.getBreedInfo?.name ?? "Unknown breed";
+      return this.getBreedInfo?.name ?? 'Unknown breed';
     },
     getOrigin(): string {
-      return this.getBreedInfo?.origin ?? "Unknown origin";
+      return this.getBreedInfo?.origin ?? 'Unknown origin';
     },
     getWikiUrl(): string {
-      return this.getBreedInfo?.wikipedia_url ?? "";
+      return this.getBreedInfo?.wikipedia_url ?? '';
     },
   },
 })

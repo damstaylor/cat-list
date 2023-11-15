@@ -2,15 +2,15 @@
 import {defineComponent} from 'vue';
 
 export default defineComponent({
-  name: "App",
+  name: 'App',
   data() {
     return {
-      REQUEST_HEADERS: { "Content-Type": "application/json", "x-api-key": "761e080c-3f90-4fc2-bfb5-bebf6a9c1c16" },
+      REQUEST_HEADERS: { 'Content-Type': 'application/json', 'x-api-key': '761e080c-3f90-4fc2-bfb5-bebf6a9c1c16' },
       responseHeaders: null as Record<string, any> | null,
       pictures: [] as any[],
       limit: 9,
       page: 0,
-      order: "Asc",
+      order: 'Asc',
     };
   },
   mounted() {
@@ -18,7 +18,7 @@ export default defineComponent({
   },
   computed: {
     getPaginationCount(): number {
-      return this.responseHeaders ? this.responseHeaders["pagination-count"] : 0;
+      return this.responseHeaders ? this.responseHeaders['pagination-count'] : 0;
     },
     getNumberOfPages(): number {
       return Math.ceil(this.getPaginationCount / this.limit);
@@ -28,20 +28,20 @@ export default defineComponent({
     async getPictures() {
       const url = `https://api.thecatapi.com/v1/images/search?limit=${this.limit}&order=${this.order}&page=${this.page}&has_breeds=1`;
       try {
-        const response = await this.makeRequest(url, "GET");
+        const response = await this.makeRequest(url, 'GET');
         if (!Array.isArray(response)) {
-          throw new Error("Error: response has the wrong format: " + response.toString());
+          throw new Error('Error: response has the wrong format: ' + response.toString());
         }
         this.pictures = response;
       } catch (e) {
         console.error(e);
       }
     },
-    async makeRequest(url: string, method = "GET") {
-      const req = new Request(url, { method, headers: this.REQUEST_HEADERS, mode: "cors" });
+    async makeRequest(url: string, method = 'GET') {
+      const req = new Request(url, { method, headers: this.REQUEST_HEADERS, mode: 'cors' });
       try {
         const data = await fetch(req);
-        this.responseHeaders = { "pagination-count": Number(data.headers.get("pagination-count")) };
+        this.responseHeaders = { 'pagination-count': Number(data.headers.get('pagination-count')) };
         return data.json();
       } catch (e) {
         console.error(e);
