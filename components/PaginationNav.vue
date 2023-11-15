@@ -48,7 +48,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <footer>
+  <footer class="pagination-footer">
     <nav>
       <ul class="pagination">
         <li>

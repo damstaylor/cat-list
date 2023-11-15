@@ -11,7 +11,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="pictures" :class="'grid-template-col-' + limit">
+  <div class="grid" :class="'grid-template-col-' + limit">
     <GridItem v-for="(pic, idx) in pictures" :catData="pic" :key=idx />
   </div>
 </template>

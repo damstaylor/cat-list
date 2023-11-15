@@ -35,7 +35,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="image-container">
+  <div class="grid-item">
     <img :src="catData.url || ''" :alt="getBreedName">
     <div class="picture-info">
       <a v-if="getWikiUrl" :href="getWikiUrl" target="_blank">{{ getBreedName }}</a>
