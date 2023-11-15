@@ -1,14 +1,13 @@
 <script lang="ts">
-import {defineComponent} from 'vue'
-import '~/assets/css/main.scss';
+import {defineComponent} from 'vue';
 
 export default defineComponent({
   name: "App",
   data() {
     return {
       REQUEST_HEADERS: { "Content-Type": "application/json", "x-api-key": "761e080c-3f90-4fc2-bfb5-bebf6a9c1c16" },
-      responseHeaders: null,
-      pictures: [],
+      responseHeaders: null as Record<string, any> | null,
+      pictures: [] as any[],
       limit: 9,
       page: 0,
       order: "Asc",
@@ -26,26 +25,28 @@ export default defineComponent({
     },
   },
   methods: {
-    getPictures() {
+    async getPictures() {
       const url = `https://api.thecatapi.com/v1/images/search?limit=${this.limit}&order=${this.order}&page=${this.page}&has_breeds=1`;
-      this.makeRequest(url, "GET").then(response => {
+      try {
+        const response = await this.makeRequest(url, "GET");
         if (!Array.isArray(response)) {
-          throw new Error('Error: response has wrong format: ' + response.toString());
+          throw new Error("Error: response has the wrong format: " + response.toString());
         }
         this.pictures = response;
-      }).catch(e => {
+      } catch (e) {
         console.error(e);
-      });
+      }
     },
-    makeRequest(url: string, method = "GET") {
-      const req = new Request(url, { method: method, headers: this.REQUEST_HEADERS, mode: "cors" });
-      return fetch(req).then(data => {
+    async makeRequest(url: string, method = "GET") {
+      const req = new Request(url, { method, headers: this.REQUEST_HEADERS, mode: "cors" });
+      try {
+        const data = await fetch(req);
         this.responseHeaders = { "pagination-count": Number(data.headers.get("pagination-count")) };
         return data.json();
-      }).catch(e => {
+      } catch (e) {
         console.error(e);
         return e;
-      });
+      }
     },
     setPage(pageIdx = 0) {
       if (pageIdx < 0) {
@@ -69,7 +70,7 @@ export default defineComponent({
     setLastPage() {
       this.setPage(this.getNumberOfPages - 1);
     },
-    onPageNumberInput(newUserPage: number) {
+    setPageValue(newUserPage: number) {
       if (newUserPage < 1) {
         newUserPage = 1;
       } else if (newUserPage > this.getNumberOfPages) {
@@ -77,7 +78,7 @@ export default defineComponent({
       }
       this.setPage(newUserPage - 1);
     },
-    onPerPageInput(newPerPageValue: number) {
+    setLimit(newPerPageValue: number) {
       this.limit = newPerPageValue;
     },
   },
@@ -85,7 +86,7 @@ export default defineComponent({
     page: 'getPictures',
     limit: 'getPictures',
   },
-})
+});
 </script>
 
 <template>
@@ -99,8 +100,8 @@ export default defineComponent({
                    @click-next="increasePage"
                    @click-start="setFirstPage"
                    @click-end="setLastPage"
-                   @page-number-input="onPageNumberInput"
-                   @per-page-input="onPerPageInput"
+                   @page-number-input="setPageValue"
+                   @per-page-input="setLimit"
     />
   </div>
 </template>
