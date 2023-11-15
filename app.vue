@@ -1,35 +1,9 @@
-<template>
-  <div class="container">
-    <h1 class="title">Cats portfolio</h1>
-    <div class="pictures" :class="'grid-template-col-' + limit">
-      <div v-for="(pic, idx) in pictures" :key=idx class="image-container">
-        <img :src="pic.url" :alt="getBreedName(pic)">
-        <div class="picture-info">
-          <a v-if="getWikiUrl(pic)" :href="getWikiUrl(pic)" target="_blank">{{ getBreedName(pic) }}</a>
-          <span v-else>{{ getBreedName(pic) }}</span>
-          <span> ({{ getOrigin(pic) }})</span>
-        </div>
-      </div>
-    </div>
-    <footer>
-      <PaginationNav :currentPage="page"
-                     :total="getPaginationCount"
-                     :perPage="limit"
-                     @click-previous="decreasePage"
-                     @click-next="increasePage"
-                     @click-start="setFirstPage"
-                     @click-end="setLastPage"
-                     @page-number-input="onPageNumberInput"
-                     @per-page-input="onPerPageInput"
-      />
-    </footer>
-  </div>
-</template>
-
-<script>
+<script lang="ts">
+import {defineComponent} from 'vue'
 import '~/assets/css/main.scss';
 
-export default {
+export default defineComponent({
+  name: "App",
   data() {
     return {
       REQUEST_HEADERS: { "Content-Type": "application/json", "x-api-key": "761e080c-3f90-4fc2-bfb5-bebf6a9c1c16" },
@@ -44,29 +18,11 @@ export default {
     this.getPictures();
   },
   computed: {
-    getPaginationCount() {
+    getPaginationCount(): number {
       return this.responseHeaders ? this.responseHeaders["pagination-count"] : 0;
     },
-    getNumberOfPages() {
+    getNumberOfPages(): number {
       return Math.ceil(this.getPaginationCount / this.limit);
-    },
-    getBreedObject() {
-      return data => data?.breeds?.[0] ?? null;
-    },
-    getBreedName() {
-      return data => {
-        return this.getBreedObject(data)?.name ?? "Unknown breed"
-      };
-    },
-    getOrigin() {
-      return data => {
-        return this.getBreedObject(data)?.origin ?? "Unknown origin";
-      };
-    },
-    getWikiUrl() {
-      return data => {
-        return this.getBreedObject(data)?.wikipedia_url ?? null;
-      };
     },
   },
   methods: {
@@ -81,7 +37,7 @@ export default {
         console.error(e);
       });
     },
-    makeRequest(url, method = "GET") {
+    makeRequest(url: string, method = "GET") {
       const req = new Request(url, { method: method, headers: this.REQUEST_HEADERS, mode: "cors" });
       return fetch(req).then(data => {
         this.responseHeaders = { "pagination-count": Number(data.headers.get("pagination-count")) };
@@ -113,7 +69,7 @@ export default {
     setLastPage() {
       this.setPage(this.getNumberOfPages - 1);
     },
-    onPageNumberInput(newUserPage) {
+    onPageNumberInput(newUserPage: number) {
       if (newUserPage < 1) {
         newUserPage = 1;
       } else if (newUserPage > this.getNumberOfPages) {
@@ -121,7 +77,7 @@ export default {
       }
       this.setPage(newUserPage - 1);
     },
-    onPerPageInput(newPerPageValue) {
+    onPerPageInput(newPerPageValue: number) {
       this.limit = newPerPageValue;
     },
   },
@@ -129,5 +85,22 @@ export default {
     page: 'getPictures',
     limit: 'getPictures',
   },
-}
+})
 </script>
+
+<template>
+  <div class="container">
+    <h1 class="title">Cats portfolio</h1>
+    <Grid :pictures="pictures" :limit="limit" />
+    <PaginationNav :currentPage="page"
+                   :total="getPaginationCount"
+                   :perPage="limit"
+                   @click-previous="decreasePage"
+                   @click-next="increasePage"
+                   @click-start="setFirstPage"
+                   @click-end="setLastPage"
+                   @page-number-input="onPageNumberInput"
+                   @per-page-input="onPerPageInput"
+    />
+  </div>
+</template>
