@@ -90,7 +90,7 @@ export default defineComponent({
         >
       </div>
       <div class="img-per-page">
-        <label for="per-page-select">Images per page:</label>
+        <label for="per-page-select">Images per page: </label>
         <select name="per-page" id="per-page-select" @input="onPerPageInput">
           <option value="4">4</option>
           <option value="9" selected>9</option>

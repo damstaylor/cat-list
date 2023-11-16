@@ -1,6 +1,6 @@
 $primary-color: #3498db;
 $bg-color: #FFFFFF;
-$text-color: #212121;
+$text-color: #414141;
 $picture-bg: #FFFFFF;
 
 $border-radius: 8px;
@@ -17,7 +17,7 @@ body {
   padding: 0;
   color: $text-color;
   background-color: $bg-color;
-  font-family: "Helvetica Neue", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 a:hover {
@@ -150,6 +150,10 @@ nav {
     background-color: $picture-bg;
     padding: $grid-gap / 2;
     text-align: center;
+
+    .origin {
+      font-size: 14px;
+    }
   }
 
   &:hover {

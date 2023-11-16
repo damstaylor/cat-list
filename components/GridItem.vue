@@ -49,7 +49,7 @@ export default defineComponent({
     <div class="picture-info">
       <a v-if="getWikiUrl" :href="getWikiUrl" target="_blank">{{ getBreedName }}</a>
       <span v-else>{{ getBreedName }}</span>
-      <span> ({{ getOrigin }})</span>
+      <div class="origin">🌍 {{ getOrigin }}</div>
     </div>
   </div>
 </template>
