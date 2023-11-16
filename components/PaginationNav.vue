@@ -18,9 +18,6 @@ export default defineComponent({
     isFirstPage(): boolean {
       return this.getCurrentUserPage === 1;
     },
-    isCurrentPage(): boolean {
-      return this.getCurrentUserPage;
-    },
     isLastPage(): boolean {
       return this.getCurrentUserPage === this.getNumberOfPages;
     },
