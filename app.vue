@@ -92,9 +92,11 @@ export default defineComponent({
 
 <template>
   <div class="container">
+    <NuxtLoadingIndicator />
     <h1 class="title">Cats portfolio</h1>
     <Grid :pictures="pictures" :limit="limit" />
-    <PaginationNav :currentPage="page"
+    <PaginationNav v-show="pictures.length"
+                   :currentPage="page"
                    :total="getPaginationCount"
                    :perPage="limit"
                    @click-previous="decreasePage"
