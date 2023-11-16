@@ -1,6 +1,8 @@
 $primary-color: #3498db;
 $bg-color: #FFFFFF;
+$bg-color-hover: rgba($primary-color, 0.8);
 $text-color: #414141;
+$text-color-clear: #FAFAFA;
 $picture-bg: #FFFFFF;
 
 $border-radius: 8px;
@@ -30,7 +32,7 @@ a:hover {
 
 .container {
   max-width: 1200px;
-  margin: 2rem;
+  margin: 2rem auto;
   padding: $padding;
 }
 
@@ -62,9 +64,10 @@ a:hover {
   display: flex;
   justify-content: center;
   margin: $grid-gap * 2 0;
+  padding: 0;
 
   li {
-    margin: 0 4px;
+    margin: 0 2px;
   }
 
   a {
@@ -160,7 +163,8 @@ nav {
     box-shadow: rgba(0, 0, 0, 0.16) 0 10px 36px 0, rgba(0, 0, 0, 0.06) 0 0 0 1px;
 
     .picture-info {
-      //background-color: whitesmoke;
+      background-color: $bg-color-hover;
+      color: $text-color-clear;
     }
 
     .thumbnail-image {
