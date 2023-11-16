@@ -31,27 +31,19 @@ export default defineComponent({
       return this.getBreedInfo?.wikipedia_url ?? '';
     },
   },
-  methods: {
-    navigateToWiki() {
-      if (this.getWikiUrl) {
-        window.open(this.getWikiUrl, "_blank");
-      }
-    },
-  },
 });
 </script>
 
 <template>
-  <div class="grid-item" @click="navigateToWiki">
+  <a v-if="getWikiUrl" class="grid-item" :href="getWikiUrl" target="_blank">
     <div class="image-container">
       <img :src="catData.url || ''" :alt="getBreedName" class="thumbnail-image">
     </div>
     <div class="picture-info">
-      <a v-if="getWikiUrl" :href="getWikiUrl" target="_blank">{{ getBreedName }}</a>
-      <span v-else>{{ getBreedName }}</span>
+      <div>{{ getBreedName }}</div>
       <div class="origin">🌍 {{ getOrigin }}</div>
     </div>
-  </div>
+  </a>
 </template>
 
 <style scoped>
