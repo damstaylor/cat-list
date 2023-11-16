@@ -94,7 +94,11 @@ a {
     }
   }
 
-  .disabled {
+  .current-page-indicator a {
+    border: 2px solid $text-color-secondary;
+  }
+
+  .disabled, .current-page-indicator a {
     cursor: default;
     opacity: 0.5;
   }
