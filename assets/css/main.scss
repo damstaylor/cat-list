@@ -82,7 +82,7 @@ a {
 
   a {
     text-decoration: none;
-    padding: $grid-gap / 2 $grid-gap;
+    padding: calc($grid-gap / 2) $grid-gap;
     background-color: $primary-color;
     color: #fff;
     border-radius: $border-radius;
@@ -104,7 +104,7 @@ footer {
 }
 
 .go-to-page {
-  margin: $grid-gap / 2 0;
+  margin: calc($grid-gap / 2) 0;
 }
 
 .go-to-page,
@@ -113,11 +113,11 @@ footer {
   text-align: center;
 
   label {
-    margin-right: $grid-gap / 2;
+    margin-right: calc($grid-gap / 2);
   }
 
   select {
-    padding: $grid-gap / 2;
+    padding: calc($grid-gap / 2);
     font-size: $font-size;
   }
 }
@@ -160,7 +160,7 @@ nav {
     left: 0;
     right: 0;
     background-color: $picture-bg;
-    padding: $grid-gap / 2;
+    padding: calc($grid-gap / 2);
     text-align: center;
 
     .origin {
