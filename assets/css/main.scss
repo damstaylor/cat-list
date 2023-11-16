@@ -25,10 +25,10 @@ body {
 a {
   color: inherit;
   text-decoration: none;
-}
 
-a:hover {
-  cursor: pointer;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .hidden {
@@ -36,9 +36,13 @@ a:hover {
 }
 
 .container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   max-width: 1200px;
   margin: 0 auto;
-  padding: $padding;
+  padding: 0 $padding;
 }
 
 .title {
@@ -95,6 +99,10 @@ a:hover {
   }
 }
 
+footer {
+  margin: $grid-gap 0;
+}
+
 .go-to-page {
   margin: $grid-gap / 2 0;
 }
@@ -114,10 +122,6 @@ a:hover {
   }
 }
 
-.footer {
-  margin: $grid-gap 0;
-}
-
 nav {
   display: flex;
   justify-content: center;
@@ -127,7 +131,6 @@ nav {
 .img-per-page {
   text-align: center;
 }
-
 
 .grid-item {
   position: relative;
