@@ -5,9 +5,9 @@ Next step: create a catalog of an exhaustive cat race list.
 
 Made with Nuxt.js 3.
 
-![capture.png](..%2F..%2FDesktop%2Fcapture.png)
+![preview](assets%2Fimg%2Fcapture.png)
 
-![capture_mobile.png](..%2F..%2FDesktop%2Fcapture_mobile.png)
+![preview](assets%2Fimg%2Fcapture_mobile.png)
 
 # Nuxt 3 Minimal Starter
 
