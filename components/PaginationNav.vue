@@ -89,7 +89,7 @@ export default defineComponent({
                @change="onPageNumberInput"
         >
       </div>
-      <div>
+      <div class="img-per-page">
         <label for="per-page-select">Images per page:</label>
         <select name="per-page" id="per-page-select" @input="onPerPageInput">
           <option value="4">4</option>
