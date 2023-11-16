@@ -2,6 +2,7 @@ $primary-color: #3498db;
 $bg-color: #FFFFFF;
 $bg-color-hover: rgba($primary-color, 0.8);
 $text-color: #414141;
+$text-color-secondary: #909090;
 $text-color-clear: #FAFAFA;
 $picture-bg: #FFFFFF;
 
@@ -164,6 +165,7 @@ nav {
     text-align: center;
 
     .origin {
+      color: $text-color-secondary;
       font-size: 14px;
     }
   }
