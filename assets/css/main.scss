@@ -37,7 +37,7 @@ a:hover {
 
 .container {
   max-width: 1200px;
-  margin: 2rem auto;
+  margin: 0 auto;
   padding: $padding;
 }
 
@@ -50,6 +50,7 @@ a:hover {
 .grid {
   display: grid;
   gap: $grid-gap;
+  margin: 0 280px 20px;
 
   &.grid-template-col-4 {
     grid-template-columns: repeat(2, 1fr);
@@ -68,7 +69,7 @@ a:hover {
   list-style: none;
   display: flex;
   justify-content: center;
-  margin: $grid-gap * 2 0;
+  margin: $grid-gap 0;
   padding: 0;
 
   li {
