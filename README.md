@@ -1,3 +1,14 @@
+# Cat list
+The aim is to display a responsive grid of cats fetched from The Cat API (https://thecatapi.com) without external UI libraries. Each picture will provide a link to the cat race info on Wikipedia.
+
+Next step: create a catalog of an exhaustive cat race list.  
+
+Made with Nuxt.js 3.
+
+![capture.png](..%2F..%2FDesktop%2Fcapture.png)
+
+![capture_mobile.png](..%2F..%2FDesktop%2Fcapture_mobile.png)
+
 # Nuxt 3 Minimal Starter
 
 Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
