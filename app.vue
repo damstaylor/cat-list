@@ -5,7 +5,12 @@ import '~/assets/css/main.scss';
 export default defineComponent({
   name: 'App',
   setup() {
-    const REQUEST_HEADERS = { 'Content-Type': 'application/json', 'x-api-key': '761e080c-3f90-4fc2-bfb5-bebf6a9c1c16' };
+    const config = useRuntimeConfig();
+    const { API_KEY, BASE_URL } = config.public;
+    const REQUEST_HEADERS = {
+      'Content-Type': 'application/json',
+      'x-api-key': API_KEY,
+    };
     const responseHeaders = ref<Record<string, any> | null>(null);
     const pictures = ref<any[]>([]);
     const limit = ref(9);
@@ -16,7 +21,7 @@ export default defineComponent({
     const numberOfPages = computed(() => Math.ceil(paginationCount.value / limit.value));
 
     const getPictures = async () => {
-      const url = `https://api.thecatapi.com/v1/images/search?limit=${limit.value}&order=${order.value}&page=${page.value}&has_breeds=1`;
+      const url = `${BASE_URL}/images/search?limit=${limit.value}&order=${order.value}&page=${page.value}&has_breeds=1`;
       try {
         const response = await makeRequest(url, 'GET');
         if (!Array.isArray(response)) {
