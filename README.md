@@ -1,9 +1,11 @@
 # Cat list
-The aim is to display a responsive grid of cats fetched from The Cat API (https://thecatapi.com) without external UI libraries. Each picture will provide a link to the cat race info on Wikipedia.
+The aim is to display a responsive grid of cats fetched from The Cat API (https://thecatapi.com). Each picture provides a link to the cat race info on Wikipedia.
 
 Next step: create a catalog of an exhaustive cat race list.  
 
-Made with Nuxt.js 3.
+Made with Vue 3 & Nuxt
+
+Try it [here](https://ds-cat-list.netlify.app)!
 
 ![preview](assets%2Fimg%2Fcapture.png)
 
