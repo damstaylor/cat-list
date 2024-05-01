@@ -5,8 +5,8 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      API_KEY: process.env.NUXT_API_KEY,
-      BASE_URL: process.env.NUXT_BASE_URL || 'https://api.thecatapi.com/v1',
+      API_KEY: process.env.API_KEY,
+      BASE_URL: process.env.BASE_URL || 'https://api.thecatapi.com/v1',
     },
   },
 });
