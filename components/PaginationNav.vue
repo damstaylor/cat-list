@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent, computed, onMounted } from 'vue';
+import { defineComponent, computed } from 'vue';
 
 export default defineComponent({
   name: 'PaginationNav',
