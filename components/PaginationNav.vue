@@ -1,50 +1,59 @@
 <script lang="ts">
-import {defineComponent} from 'vue'
+import { defineComponent, computed, onMounted } from 'vue';
 
 export default defineComponent({
-  name: "PaginationNav",
+  name: 'PaginationNav',
   props: {
     currentPage: { type: Number, default: () => 0 },
     total: { type: Number, default: () => 0 },
     perPage: { type: Number, default: () => 9 }
   },
-  computed: {
-    getCurrentUserPage(): number {
-      return this.currentPage + 1;
-    },
-    getNumberOfPages(): number {
-      return Math.ceil(this.total / this.perPage);
-    },
-    isFirstPage(): boolean {
-      return this.getCurrentUserPage === 1;
-    },
-    isLastPage(): boolean {
-      return this.getCurrentUserPage === this.getNumberOfPages;
-    },
-  },
-  methods: {
-    onClickPrevious() {
-      this.$emit("click-previous");
-    },
-    onClickNext() {
-      this.$emit("click-next");
-    },
-    onClickStart() {
-      this.$emit("click-start");
-    },
-    onClickEnd() {
-      this.$emit("click-end");
-    },
-    onPageNumberInput(event: Event) {
+  setup(props, { emit }) {
+    const getCurrentUserPage = computed(() => props.currentPage + 1);
+    const getNumberOfPages = computed(() => Math.ceil(props.total / props.perPage));
+    const isFirstPage = computed(() => getCurrentUserPage.value === 1);
+    const isLastPage = computed(() => getCurrentUserPage.value === getNumberOfPages.value);
+
+    const onClickPrevious = (): void => {
+      emit('click-previous');
+    };
+
+    const onClickNext = (): void => {
+      emit('click-next');
+    };
+
+    const onClickStart = (): void => {
+      emit('click-start');
+    };
+
+    const onClickEnd = (): void => {
+      emit('click-end');
+    };
+
+    const onPageNumberInput = (event: InputEvent): void => {
       if (!event) return;
-      this.$emit("page-number-input", Number(event.target.value));
-    },
-    onPerPageInput(event: KeyboardEvent) {
+      emit('page-number-input', Number((event.target as HTMLInputElement).value));
+    };
+
+    const onPerPageInput = (event: InputEvent): void => {
       if (!event) return;
-      this.$emit("per-page-input", Number(event.target.value));
-    },
+      emit('per-page-input', Number((event.target as HTMLSelectElement).value));
+    };
+
+    return {
+      getCurrentUserPage,
+      getNumberOfPages,
+      isFirstPage,
+      isLastPage,
+      onClickPrevious,
+      onClickNext,
+      onClickStart,
+      onClickEnd,
+      onPageNumberInput,
+      onPerPageInput,
+    };
   },
-})
+});
 </script>
 
 <template>
@@ -100,7 +109,3 @@ export default defineComponent({
     </nav>
   </footer>
 </template>
-
-<style scoped>
-
-</style>

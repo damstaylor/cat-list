@@ -1,5 +1,5 @@
 <script lang="ts">
-import {defineComponent} from 'vue';
+import { defineComponent, computed } from 'vue';
 
 interface CatData {
   url: string;
@@ -15,21 +15,18 @@ interface BreedInfo {
 export default defineComponent({
   name: 'GridItem',
   props: {
-    catData: { type: Object as () => CatData, default: () => ({ url: '' }) } as any,
+    catData: {
+      type: Object as () => CatData,
+      default: () => ({ url: '' })
+    }
   },
-  computed: {
-    getBreedInfo(): BreedInfo | null {
-      return this.catData?.breeds?.[0] ?? null;
-    },
-    getBreedName(): string {
-      return this.getBreedInfo?.name ?? 'Unknown breed';
-    },
-    getOrigin(): string {
-      return this.getBreedInfo?.origin ?? 'Unknown origin';
-    },
-    getWikiUrl(): string {
-      return this.getBreedInfo?.wikipedia_url ?? '';
-    },
+  setup(props) {
+    const getBreedInfo = computed(() => props.catData?.breeds?.[0] ?? null);
+    const getBreedName = computed(() => getBreedInfo.value?.name ?? 'Unknown breed');
+    const getOrigin = computed(() => getBreedInfo.value?.origin ?? 'Unknown origin');
+    const getWikiUrl = computed(() => getBreedInfo.value?.wikipedia_url ?? '');
+
+    return { getBreedInfo, getBreedName, getOrigin, getWikiUrl };
   },
 });
 </script>
@@ -45,6 +42,3 @@ export default defineComponent({
     </div>
   </a>
 </template>
-
-<style scoped>
-</style>
