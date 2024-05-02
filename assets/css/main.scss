@@ -2,7 +2,7 @@ $primary-color: #3498db;
 $bg-color: #FFFFFF;
 $bg-color-hover: rgba($primary-color, 0.8);
 $text-color: #414141;
-$text-color-secondary: #909090;
+$text-color-secondary: #C1C1C1;
 $text-color-clear: #FAFAFA;
 $picture-bg: #FFFFFF;
 
@@ -20,7 +20,7 @@ body {
   padding: 0;
   color: $text-color;
   background-color: $bg-color;
-  font-family: "Inter", sans-serif;
+  font-family: "Gotham", sans-serif;
 }
 
 a {
@@ -167,10 +167,29 @@ nav {
     background-color: $picture-bg;
     padding: calc($grid-gap / 2);
     text-align: center;
+    max-height: 36px;
+
+    .breed {
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
 
     .origin {
       color: $text-color-secondary;
-      font-size: 14px;
+      font-size: 12px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 4px;
+
+      img {
+        width: 12px;
+        border-radius: 4px;
+        opacity: 80%;
+      }
     }
   }
 
