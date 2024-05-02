@@ -21,7 +21,7 @@ export default defineComponent({
     const numberOfPages = computed(() => Math.ceil(paginationCount.value / limit.value));
 
     const getPictures = async () => {
-      const url = `${BASE_URL}/images/search?limit=${limit.value}&order=${order.value}&page=${page.value}&has_breeds=1`;
+      const url = `${BASE_URL}/breeds?limit=${limit.value}&order=${order.value}&page=${page.value}`;
       try {
         const response = await makeRequest(url, 'GET');
         if (!Array.isArray(response)) {
@@ -114,8 +114,8 @@ export default defineComponent({
 
 <template>
   <div class="container">
-    <h1 class="title">Cats portfolio</h1>
-    <Grid :pictures="pictures" :limit="limit" />
+    <h1 class="title">Cat races</h1>
+    <Grid :items="pictures" :limit="limit" />
     <PaginationNav v-show="pictures.length"
                    :currentPage="page"
                    :total="paginationCount"

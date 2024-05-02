@@ -5,7 +5,7 @@ export default defineComponent({
   name: 'Grid',
   components: { GridItem },
   props: {
-    pictures: { type: Array as () => any[], default: () => [] },
+    items: { type: Array as () => any[], default: () => [] },
     limit: { type: Number, default: 9 }
   },
 })
@@ -13,6 +13,6 @@ export default defineComponent({
 
 <template>
   <div class="grid" :class="'grid-template-col-' + limit">
-    <GridItem v-for="(pic, idx) in pictures" :catData="pic" :key="idx" />
+    <GridItem v-for="(pic, idx) in items" :catData="pic" :key="idx" />
   </div>
 </template>

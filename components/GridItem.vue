@@ -2,12 +2,9 @@
 import { defineComponent, computed } from 'vue';
 
 interface CatData {
-  url: string;
-  breeds: BreedInfo[];
-}
-
-interface BreedInfo {
   name: string;
+  country_code: string;
+  image: { url: string };
   origin: string;
   wikipedia_url: string;
 }
@@ -21,24 +18,27 @@ export default defineComponent({
     }
   },
   setup(props) {
-    const getBreedInfo = computed(() => props.catData?.breeds?.[0] ?? null);
-    const getBreedName = computed(() => getBreedInfo.value?.name ?? 'Unknown breed');
-    const getOrigin = computed(() => getBreedInfo.value?.origin ?? 'Unknown origin');
-    const getWikiUrl = computed(() => getBreedInfo.value?.wikipedia_url ?? '');
+    const getBreedName = computed(() => props.catData?.name ?? 'Unknown breed');
+    const getOrigin = computed(() => props.catData?.origin ?? 'Unknown origin');
+    const getCountryCode = computed(() => props.catData?.country_code ?? '');
+    const getFlagUrl = computed(() => `https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/flags/1x1/${getCountryCode.value.toLowerCase()}.svg`);
+    const getWikiUrl = computed(() => props.catData?.wikipedia_url ?? '');
 
-    return { getBreedInfo, getBreedName, getOrigin, getWikiUrl };
+    return { getBreedName, getFlagUrl, getOrigin, getWikiUrl };
   },
 });
 </script>
 
 <template>
-  <a v-if="getWikiUrl" class="grid-item" :href="getWikiUrl" target="_blank">
+  <a class="grid-item" :href="getWikiUrl || '#'" :target="getWikiUrl ? '_blank' : null">
     <div class="image-container">
-      <img :src="catData.url || ''" :alt="getBreedName" class="thumbnail-image">
+      <img :src="catData?.image?.url || ''" :alt="getBreedName" class="thumbnail-image">
     </div>
     <div class="picture-info">
-      <div>{{ getBreedName }}</div>
-      <div class="origin">🌍 {{ getOrigin }}</div>
+      <div class="breed">{{ getBreedName }}</div>
+      <div class="origin">
+        <img :src="getFlagUrl" :alt="getFlagUrl" /> {{ getOrigin }}
+      </div>
     </div>
   </a>
 </template>
