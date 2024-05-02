@@ -1,6 +1,4 @@
 <script lang="ts">
-import { defineComponent, computed } from 'vue';
-
 interface CatData {
   name: string;
   country_code: string;

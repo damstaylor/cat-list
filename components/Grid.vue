@@ -1,9 +1,6 @@
 <script lang="ts">
-import { defineComponent } from 'vue';
-import GridItem from './GridItem.vue';
 export default defineComponent({
   name: 'Grid',
-  components: { GridItem },
   props: {
     items: { type: Array as () => any[], default: () => [] },
     limit: { type: Number, default: 9 }

@@ -1,5 +1,4 @@
 <script lang="ts">
-import { defineComponent, ref, computed, watch } from 'vue';
 import '~/assets/css/main.scss';
 
 export default defineComponent({
